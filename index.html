@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Bash to Powershell Converter Online</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/css/tabler.min.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+        <style>
+            textarea {
+                padding: 0;
+                overflow: hidden;
+                height: 10rem;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/@tabler/core@1.0.0-beta17/dist/js/tabler.min.js"></script>
+        <div class="page">
+            <header class="navbar navbar-expand-sm navbar-light d-print-none">
+                <div class="container-xl">
+                    <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+                        <a href=""><span id="title_text">Bash to Powershell Converter Online</span></a>
+                    </h1>
+
+                    <div class="navbar-nav flex-row order-md-last">
+                        <div class="nav-item">
+                            <a href="https://github.com/chifahe/bash-to-powershell-converter-online/" class="nav-link d-flex lh-1 text-reset p-0">
+                                <div class="d-none d-xl-block ps-2">
+                                    <div><span id="repo_text">Visit repository</span></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="container-xl">
+                        <div class="row row-deck row-cards">
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">Bash</label>
+                                            <textarea id="input" class="form-control" placeholder="Enter Bash scripts here"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="mb-3">
+                                            <label class="form-label">PowerShell</label>
+                                            <textarea id="output" readonly="readonly" class="form-control" placeholder="Conversion results"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Static variety
+            const s_input = document.getElementById("input");
+            const s_output = document.getElementById("output");
+
+            window.onload = function () {
+                s_input.addEventListener("input", function (e) {
+                    // The height of the textarea changes with the content
+                    this.style.height = "10rem";
+                    this.style.height = e.target.scrollHeight + "px";
+
+                    // Convert while typing
+                    s_output.value = convert(s_input.value);
+                    s_output.style.height = "10rem";
+                    s_output.style.height = s_output.scrollHeight + "px";
+                });
+            };
+
+            // Detect language based on browser settings
+            if (navigator.language == "zh-CN") {
+                document.getElementById("title_text").innerText = "在线转换 Bash 到 PowerShell";
+                document.getElementById("repo_text").innerText = "访问仓库";
+                s_input.placeholder = "在此输入 Bash 脚本";
+                s_output.placeholder = "转换结果";
+            }
+        </script>
+        <script src="bash2pwsh.js"></script>
+    </body>
+</html>
